@@ -503,7 +503,7 @@ The fifth log entry is that same ETW message, but logged to MEL providers throug
 DataVisualizationDotNetCore.Program: Information: 2021-05-07 23:25:33Z | 26600 | Informational | DiceThrowLibrary has generated 100 total throws this run.
 ```
 
-## Logging Exception Occurances
+## Logging Exception Occurences
 
 Notice that in our log above, we see an Exception.  This exception was deliberately generated inside our library by our test code and was not handled by a `try/catch` block.  Thus, it was passed to the `Application.ThreadException` event handler, which is called for all unhandled exceptions in our application and constituent library DLLs.
 
