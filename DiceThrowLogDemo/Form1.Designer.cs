@@ -41,7 +41,7 @@ namespace DataVisualizationDotNetCore
             // 
             // AddRolls
             // 
-            this.AddRolls.Location = new System.Drawing.Point(772, 102);
+            this.AddRolls.Location = new System.Drawing.Point(764, 102);
             this.AddRolls.Name = "AddRolls";
             this.AddRolls.Size = new System.Drawing.Size(152, 56);
             this.AddRolls.TabIndex = 2;
@@ -61,7 +61,7 @@ namespace DataVisualizationDotNetCore
             // 
             // ExceptionButton
             // 
-            this.ExceptionButton.Location = new System.Drawing.Point(161, 624);
+            this.ExceptionButton.Location = new System.Drawing.Point(145, 624);
             this.ExceptionButton.Name = "ExceptionButton";
             this.ExceptionButton.Size = new System.Drawing.Size(216, 46);
             this.ExceptionButton.TabIndex = 4;
@@ -82,25 +82,25 @@ namespace DataVisualizationDotNetCore
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(229, 211);
+            this.label1.Location = new System.Drawing.Point(191, 211);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 25);
+            this.label1.Size = new System.Drawing.Size(170, 25);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Die Rolls";
+            this.label1.Text = "Die Roll Distribution";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(800, 211);
+            this.label2.Location = new System.Drawing.Point(746, 211);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 25);
+            this.label2.Size = new System.Drawing.Size(194, 25);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Dice Totals";
+            this.label2.Text = "Dice Totals Distribution";
             // 
             // RollTotalLabel
             // 
             this.RollTotalLabel.AutoSize = true;
-            this.RollTotalLabel.Location = new System.Drawing.Point(529, 211);
+            this.RollTotalLabel.Location = new System.Drawing.Point(506, 211);
             this.RollTotalLabel.Name = "RollTotalLabel";
             this.RollTotalLabel.Size = new System.Drawing.Size(106, 25);
             this.RollTotalLabel.TabIndex = 8;
@@ -108,7 +108,7 @@ namespace DataVisualizationDotNetCore
             // 
             // DefaultEventListenerButton
             // 
-            this.DefaultEventListenerButton.Location = new System.Drawing.Point(746, 624);
+            this.DefaultEventListenerButton.Location = new System.Drawing.Point(716, 624);
             this.DefaultEventListenerButton.Name = "DefaultEventListenerButton";
             this.DefaultEventListenerButton.Size = new System.Drawing.Size(259, 46);
             this.DefaultEventListenerButton.TabIndex = 9;
