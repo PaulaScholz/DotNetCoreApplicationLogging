@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This project illustrates [Event Tracing for Windows](https://docs.microsoft.com/en-us/windows/win32/etw/event-tracing-portal) (ETW) messaging inside a DLL, sending diagnostic messages to an [EventListener](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.tracing.eventlistener?view=net-5.0) inside the main application, where they are recorded by a number of log providers using methods in the [Microsoft.Extensions.Logging](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line) namespace.
+This project illustrates [Event Tracing for Windows](https://docs.microsoft.com/en-us/windows/win32/etw/event-tracing-portal) (ETW) messaging inside a .Net Core DLL, sending diagnostic messages to an [EventListener](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.tracing.eventlistener?view=net-5.0) inside the main application, where they are recorded by a number of log providers using methods in the [Microsoft.Extensions.Logging](https://docs.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line) namespace.
 
 The project makes use of techniques and is derived from code inside a [blog article](https://badecho.com/index.php/2021/01/26/net-library-log/) by [Mr. Matthew Weber](https://badecho.com/index.php/about-omni/), a talented engineer, celebrated game hacker, and founder of Bad Echo, LLC. I have slightly modified and extended his system to marry ETW with `Microsoft.Extensions.Logging`, providing a comprehensive logging system for use in Windows Forms, WPF, and .Net Console applications under .Net Core.
 
@@ -562,7 +562,7 @@ Note that inside our `Application.ThreadException` event handler, we have called
 
 *The Form1 class uses the ILogger iMELLogger. Is this iMELLogger a publisher or subscriber?*
 
-The `iMELLogger` does not subscribe to the LogEventSource. That is the job of the derived `EventListener` class, EventListenerStub, which is instantiated as the `_etwListener` inside the Program.Main() method and subscribed to the LogEventSource using the override method *EnableEvents(LogEventSource.Instance, EventLevel.LogAlways)* call.  
+The `iMELLogger` does not subscribe to the LogEventSource. That is the job of the derived `EventListener` class, EventListenerStub, which is instantiated as the `_etwListener` inside the Program.Main() method and subscribed to the LogEventSource using the method *EnableEvents(LogEventSource.Instance, EventLevel.LogAlways)* call.  
  
 Inside that EventListenerStub class is an event handler method override called `OnEventWritten` which is the method that actually receives event messages from the LogEventSource in the library.  Those are then echoed to the Program class’s `iMELLogger` instance depending on event level.  Recall, inside Program.Main() we set the EventListenerStub’s reference to the `iMELLogger` created with the LoggerFactory so *EventListenerStub.OnEventWritten* can call the `Program.iMELLogger` with event messages received from the LogEventSource.
 
