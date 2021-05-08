@@ -36,11 +36,12 @@ namespace DataVisualizationDotNetCore
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.RollTotalLabel = new System.Windows.Forms.Label();
+            this.DefaultEventListenerButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // AddRolls
             // 
-            this.AddRolls.Location = new System.Drawing.Point(191, 108);
+            this.AddRolls.Location = new System.Drawing.Point(772, 102);
             this.AddRolls.Name = "AddRolls";
             this.AddRolls.Size = new System.Drawing.Size(152, 56);
             this.AddRolls.TabIndex = 2;
@@ -50,7 +51,7 @@ namespace DataVisualizationDotNetCore
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(796, 108);
+            this.ClearButton.Location = new System.Drawing.Point(191, 102);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(152, 56);
             this.ClearButton.TabIndex = 3;
@@ -60,7 +61,7 @@ namespace DataVisualizationDotNetCore
             // 
             // ExceptionButton
             // 
-            this.ExceptionButton.Location = new System.Drawing.Point(466, 647);
+            this.ExceptionButton.Location = new System.Drawing.Point(161, 624);
             this.ExceptionButton.Name = "ExceptionButton";
             this.ExceptionButton.Size = new System.Drawing.Size(216, 46);
             this.ExceptionButton.TabIndex = 4;
@@ -81,7 +82,7 @@ namespace DataVisualizationDotNetCore
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(247, 211);
+            this.label1.Location = new System.Drawing.Point(229, 211);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 25);
             this.label1.TabIndex = 6;
@@ -90,7 +91,7 @@ namespace DataVisualizationDotNetCore
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(805, 211);
+            this.label2.Location = new System.Drawing.Point(800, 211);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 25);
             this.label2.TabIndex = 7;
@@ -105,11 +106,22 @@ namespace DataVisualizationDotNetCore
             this.RollTotalLabel.TabIndex = 8;
             this.RollTotalLabel.Text = "0 Total Rolls";
             // 
+            // DefaultEventListenerButton
+            // 
+            this.DefaultEventListenerButton.Location = new System.Drawing.Point(746, 624);
+            this.DefaultEventListenerButton.Name = "DefaultEventListenerButton";
+            this.DefaultEventListenerButton.Size = new System.Drawing.Size(259, 46);
+            this.DefaultEventListenerButton.TabIndex = 9;
+            this.DefaultEventListenerButton.Text = "Disable DefaultEventListener";
+            this.DefaultEventListenerButton.UseVisualStyleBackColor = true;
+            this.DefaultEventListenerButton.Click += new System.EventHandler(this.DefaultEventListenerButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 712);
+            this.Controls.Add(this.DefaultEventListenerButton);
             this.Controls.Add(this.RollTotalLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -121,7 +133,11 @@ namespace DataVisualizationDotNetCore
             this.Name = "Form1";
             this.Text = "Form1";
 
-            // If you modify the form in the designer, you'll need to comment out these two statements
+            // Comment these out if you make design changes to the Form. They are called
+            // in Form1.SetupChart(). Visual Studio 2019 clobbers any code in InitializeComponent
+            // on any design change, and because the Windows Forms designer in VS2019 does not
+            // recognize our Systems.Windows.Forms.DataVisualization classes for .Net 5, all the
+            // chart setup is done in Form1.SetupChart(), called from the Form1.Load event handler.
             //this.ResumeLayout(false);
             //this.PerformLayout();
 
@@ -138,6 +154,7 @@ namespace DataVisualizationDotNetCore
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label RollTotalLabel;
+        private System.Windows.Forms.Button DefaultEventListenerButton;
     }
 }
 

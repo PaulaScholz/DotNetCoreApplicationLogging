@@ -490,14 +490,35 @@ The program '[26120] DiceThrowLogDemo.exe' has exited with code 0 (0x0).
 
 The first log message is from the `iMELLogger` inside the Program.cs constructor, telling us we've created the logger factory and logged our first message. The second and thrid messages are from the `Form1` class, reporting setup of the chart controls and the `Form1_Load` event.
 
-But what is the fourth message?  It doesn't seem to have any source information.  This message is an ETW message echoed to the Debug console from the `DefaultEventListener` inside the ETW logging code in our DLL.  We can turn these default messages off simply by changing the `DefaultEventListener` code to not enable the DLL's ETW `EventSource`.  The `EventSouce` will still be enabled by our application code when we create our `_etwListener` using the EnableEvents method of the Application's `_etwListener` instance.
+But what is the fourth message?  It doesn't seem to have any source information.  This message is an ETW message echoed to the Visual Studio Debug console (the Output window) from the `DefaultEventListener` inside the ETW logging code in our DLL.  We can turn these default messages off simply by calling the `Logger.DisableDefaultListener` method. The `EventSouce` will still be enabled by our application code when we create our `_etwListener` using the EnableEvents method of the Application's `_etwListener` instance, as we do in Program.cs.
+
+We have exposed this capability from the `DiceThrowLibrary` with two public methods:
  
 ```csharp
-// enable listening to the event source in the DiceThrowLibrary
-_etwListener.EnableEvents(LogEventSource.Instance, EventLevel.LogAlways);
+        /// <summary>
+        /// This method disables the DefaultEventListener which will suppress library ETW messages
+        /// from appearing on attached debuggers.  Logger ETW messages will still be sent to any
+        /// enabled application EventListener.
+        /// </summary>
+        public static void DisableDefaultEventListener()
+        {
+            Logger.DisableDefaultListener();
+        }
+
+        /// <summary>
+        /// This method enables the DefaultEventListener to generate library ETW messages
+        /// that will then appear on attached debuggers. The DefaultEventListener is enabled
+        /// by default. Logger ETW messages are always sent to any enabled application EventListener.
+        /// </summary>
+        public static void EnableDefaultEventListener()
+        {
+            Logger.EnableDefaultListener();
+        }
 ```
 
-The fifth log entry is that same ETW message, but logged to MEL providers through the Program class' `iMELLogger` instance.  You will see a mix of ETW and MEL logger messages throughout the log.  ETW messages recorded by the MEL logger will have their class origin on the line, as well as the contents of the ETW message (including time stamp, thread ID, log level, and message). Log entries that look like this are from the ETW system, echoed through MEL:
+You may see and test this capability from the demonstration progam user interface by toggling the `Disable/Enable DefaultEventListener` button.
+
+The fifth log entry is that same ETW message, but logged to MEL providers through the Program class' `iMELLogger` instance.  You will see a mix of ETW and MEL logger messages throughout the log if you do not disable the DefaultEventListener.  ETW messages recorded by the MEL logger will have their class origin on the line, as well as the contents of the ETW message (including time stamp, thread ID, log level, and message). Log entries that look like this are from the ETW system, echoed through MEL:
 
 ```
 DataVisualizationDotNetCore.Program: Information: 2021-05-07 23:25:33Z | 26600 | Informational | DiceThrowLibrary has generated 100 total throws this run.

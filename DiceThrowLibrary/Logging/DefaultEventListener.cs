@@ -33,7 +33,7 @@ namespace DiceThrowLibrary.Logging
                     (eventData.Payload != null ? eventData.Payload[4] : "Missing Exception Payload")}";
             }
 
-            // comment this out if you don't want this echoed by the debugger
+            // send the ETW message to any attached debuggers.
             Debugger.Log(0, null, $"{outputMessage}{Environment.NewLine}");
 
             base.OnEventWritten(eventData);

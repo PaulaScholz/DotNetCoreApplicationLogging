@@ -25,6 +25,13 @@ namespace DataVisualizationDotNetCore
         // the Microsoft.Extensions.Logging (MEL) logger for this particular form
         private static ILogger iMELLogger;
 
+        // Default status of the ETW Logger's DefaultEventListener.  It may be 
+        // toggled on or off to suppress ETW messages on any attached debuggers.
+        // Since the EventListenerStub class in Program.cs echos ETW messages to 
+        // its attached log providers, you may wish to suppress the DefaultEventListener's
+        // messages so they don't appear twice in the Visual Studio 2019 Output window.
+        private bool DefaultEventListenerEnabled = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -193,6 +200,9 @@ namespace DataVisualizationDotNetCore
 
             RollTotalLabel.Text = string.Format("{0} Total Rolls", NumberOfRolls);
 
+            // reenable the DefaultEventListener in the library
+            DiceThrow.EnableDefaultEventListener();
+
             // log it
             iMELLogger.LogInformation("ClearButton_Click completed.");
         }
@@ -204,6 +214,34 @@ namespace DataVisualizationDotNetCore
             // generate a divide by zero exception in the library, it is unhandled and will be caught
             // by the Program.Application_ThreadException handler where it will be logged.
             DiceThrowLibrary.DiceThrow.DivideByZero();
+        }
+
+        /// <summary>
+        /// Toggle the status of the DefaultEventListener in the ETW logger to supress or enable
+        /// ETW messages on attached debuggers like the Visual Studio debugger on the Output window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DefaultEventListenerButton_Click(object sender, EventArgs e)
+        {
+            // toggle the status 
+            DefaultEventListenerEnabled = !DefaultEventListenerEnabled;
+
+            if (DefaultEventListenerEnabled)
+            {
+                DiceThrow.EnableDefaultEventListener();
+
+                DefaultEventListenerButton.Text = "Disable DefaultEventListener";
+            }
+            else
+            {
+                // Suppress ETW DefaultEventListener messages from appearing
+                // on attached debuggers. They will still be logged by the EventListenerStub's
+                // iMELLogger in Program.cs, but won't appear Visual Studio Output window twice.
+                DiceThrow.DisableDefaultEventListener();
+
+                DefaultEventListenerButton.Text = "Enable DefaultEventListener";
+            }
         }
     }
 }

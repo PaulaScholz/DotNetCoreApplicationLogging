@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics.Tracing;
 #nullable enable
 
 namespace DiceThrowLibrary.Logging
@@ -86,5 +85,13 @@ namespace DiceThrowLibrary.Logging
         /// </summary>
         public static void DisableDefaultListener()
             => _Listener.DisableEvents(Source);
+
+        /// <summary>
+        /// Enables the default event listener created when this logger is used. That
+        /// listener is enabled by default, so only call this if you've disabled it 
+        /// and wish to reenable it.
+        /// </summary>
+        public static void EnableDefaultListener()
+            => _Listener.EnableEvents(Source, EventLevel.LogAlways, EventKeywords.All);
     }
 }

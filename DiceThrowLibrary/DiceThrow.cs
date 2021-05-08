@@ -66,5 +66,25 @@ namespace DiceThrowLibrary
             return x / y;
         }
 
+        /// <summary>
+        /// This method disables the DefaultEventListener which will suppress library ETW messages
+        /// from appearing on attached debuggers.  Logger ETW messages will still be sent to any
+        /// enabled application EventListener.
+        /// </summary>
+        public static void DisableDefaultEventListener()
+        {
+            Logger.DisableDefaultListener();
+        }
+
+        /// <summary>
+        /// This method enables the DefaultEventListener to generate library ETW messages
+        /// that will then appear on attached debuggers. The DefaultEventListener is enabled
+        /// by default. Logger ETW messages are always sent to any enabled application EventListener.
+        /// </summary>
+        public static void EnableDefaultEventListener()
+        {
+            Logger.EnableDefaultListener();
+        }
+
     }
 }
