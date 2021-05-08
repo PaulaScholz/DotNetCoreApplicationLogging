@@ -61,7 +61,7 @@ namespace DataVisualizationDotNetCore
             // 
             // ExceptionButton
             // 
-            this.ExceptionButton.Location = new System.Drawing.Point(145, 624);
+            this.ExceptionButton.Location = new System.Drawing.Point(158, 625);
             this.ExceptionButton.Name = "ExceptionButton";
             this.ExceptionButton.Size = new System.Drawing.Size(216, 46);
             this.ExceptionButton.TabIndex = 4;
@@ -82,7 +82,7 @@ namespace DataVisualizationDotNetCore
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(191, 211);
+            this.label1.Location = new System.Drawing.Point(187, 211);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(170, 25);
             this.label1.TabIndex = 6;
