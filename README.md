@@ -538,6 +538,8 @@ Because we have enabled the `Windows Event Log` provider in our `iMELLoggerFacto
 
 Note that inside our `Application.ThreadException` event handler, we have called the `iMELLogger` LogError method, thus the Windows Event Log records this event with the Error level.
 
+In a Release build, program execution will continue from this exception handler.  In a Debug build, the program will break on the exception and execution may be resumed by pressing the `Continue` button in the Visual Studio user interface.
+
 ```csharp
         /// <summary>
         /// Unhandled exceptions from the application and any linked .Net library bubble up to this handler.
